@@ -1,18 +1,18 @@
-### Making local AI fast on Apple silicon
+### Local AI on Apple silicon, measured honestly
 
-I build inference engines for the GPU matrix units ("neural accelerators") of M5/M6 Macs, and measure them against the hardware's own peak and against the best Mac runtimes I can find.
+I build and benchmark local inference on Macs: GPU kernels where they help, and end-to-end measurements of what actually gets work done.
 
-**[raceline](https://github.com/audenvenn/raceline)**: a local agent runtime with its own Metal engine for Qwen3.5 / 3.6 / 3.8
-- Qwen3.6-35B-A3B on a 24 GB Mac mini at 61–118 tok/s, with its experts streamed from the SSD
-- Qwen3.8-27B at 25–40 tok/s, where mlx-lm manages 8–9 on the same machine
-- exact speculative decoding (bit-identical output), image input, and a server that speaks OpenAI's and Anthropic's APIs (works with Claude Code)
+**[solvetime](https://github.com/audenvenn/solvetime)**: how long a Mac takes to finish real coding tasks with a local model. Each engine is scored on tasks solved and time to solution, not tokens per second, and every trajectory is published.
+- First result: on a 24 GB Mac, the Qwen3.6-35B builds that fit are ~2-bit, and they drop the opening `<tool_call>` tag. We reported it, and kapitsa fixed its parser the same day (7/16 → 14/16 tasks solved).
 
-**[h3metal](https://github.com/audenvenn/h3metal)**: image generation on the same GPUs
-- FLUX.2 [klein] 4B: 1024 × 1024 in 7.4 s, 2.3× mflux · Z-Image-Turbo: 2.1× mflux
-- MiniMax-H3-Image (33B): 2048 × 2048 in 41 s, or 16 s in two steps
-- LoRA adapters applied exactly, inside the int8 matrix products
+**[h3metal](https://github.com/audenvenn/h3metal)**: image generation on the M5/M6 GPU matrix units
+- about 2.3x faster than Draw Things' CLI per denoising step (FLUX.2 [klein] 4B, Z-Image-Turbo, same Mac)
+- MiniMax-H3-Image (33B): 2048 × 2048 in 16 s with two steps on a 24 GB Mac mini
 
-Upstream: [huggingface/diffusers#15276](https://github.com/huggingface/diffusers/pull/15276) (FLUX.2 LoRA conversion fix).
-Converted weights: [huggingface.co/audenvenn](https://huggingface.co/audenvenn) · Updates: [x.com/audenvenn](https://x.com/audenvenn)
+**[raceline](https://github.com/audenvenn/raceline)** (research, maintenance mode): a local agent runtime with its own Metal engine. Its findings feed solvetime: MTP drafting, experts streamed from the SSD, and a GPU that slows down while it waits for the CPU.
 
-All numbers are from an M6 Mac mini (24 GB); each repository documents how they were measured.
+Upstream: [diffusers#15276](https://github.com/huggingface/diffusers/pull/15276) (FLUX.2 LoRA fix) · [kapitsa#1277](https://github.com/nace-ai/kapitsa/issues/1277) (fixed in #1279) · [MTPLX#695](https://github.com/youssofal/MTPLX/issues/695)
+
+Converted weights: [huggingface.co/audenvenn](https://huggingface.co/audenvenn) · Updates: [x.com/audenvenn](https://x.com/audenvenn) · [bsky.app/profile/audenvenn.bsky.social](https://bsky.app/profile/audenvenn.bsky.social)
+
+All numbers come from one M6 Mac mini (24 GB) unless stated; each repository documents how they were measured.
