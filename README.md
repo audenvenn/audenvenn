@@ -3,7 +3,7 @@
 I build and benchmark local inference on Macs: GPU kernels where they help, and end-to-end measurements of what actually gets work done.
 
 **[solvetime](https://github.com/audenvenn/solvetime)**: how long a Mac takes to finish real coding tasks with a local model. Each engine is scored on tasks solved and time to solution, not tokens per second, and every trajectory is published.
-- First result: on a 24 GB Mac, the Qwen3.6-35B builds that fit are ~2-bit, and they drop the opening `<tool_call>` tag. We reported it, and kapitsa fixed its parser the same day (7/16 → 14/16 tasks solved).
+- First result: on a 24 GB Mac, the Qwen3.6-35B builds that fit are ~2-bit, and they drop the opening `<tool_call>` tag. We reported it, and kapitsa fixed its parser the same day (19/32 → 28/32 tasks solved).
 
 **[h3metal](https://github.com/audenvenn/h3metal)**: image generation on the M5/M6 GPU matrix units
 - about 2.3x faster than Draw Things' CLI per denoising step (FLUX.2 [klein] 4B, Z-Image-Turbo, same Mac)
