@@ -13,6 +13,6 @@ I build and benchmark local inference on Macs: GPU kernels where they help, and 
 
 Upstream: [diffusers#15276](https://github.com/huggingface/diffusers/pull/15276) (FLUX.2 LoRA fix) · [kapitsa#1277](https://github.com/nace-ai/kapitsa/issues/1277) (fixed in #1279) · [MTPLX#695](https://github.com/youssofal/MTPLX/issues/695)
 
-Converted weights: [huggingface.co/audenvenn](https://huggingface.co/audenvenn) · Updates: [x.com/audenvenn](https://x.com/audenvenn) · [bsky.app/profile/audenvenn.bsky.social](https://bsky.app/profile/audenvenn.bsky.social)
+Blog: [audenvenn.github.io](https://audenvenn.github.io) · Converted weights: [huggingface.co/audenvenn](https://huggingface.co/audenvenn) · Updates: [x.com/audenvenn](https://x.com/audenvenn) · [bsky.app/profile/audenvenn.bsky.social](https://bsky.app/profile/audenvenn.bsky.social)
 
 All numbers come from one M6 Mac mini (24 GB) unless stated; each repository documents how they were measured.
